@@ -7,10 +7,9 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Comparar DEV_TOKEN (Secret) con LOCAL_DEV_TOKEN (Local)
-        shell: pwsh
+        shell: powershell
         env:
           DEV_SECRET: ${{ secrets.DEV_TOKEN }}
-          LOCAL_DEV_TOKEN: ${{ env.LOCAL_DEV_TOKEN }}
         run: |
           $localVal = [System.Environment]::GetEnvironmentVariable('LOCAL_DEV_TOKEN', 'User')
           Write-Host "DEV_TOKEN (Secret): $env:DEV_SECRET"
