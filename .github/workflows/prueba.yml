@@ -10,11 +10,13 @@ jobs:
         shell: pwsh
         env:
           DEV_SECRET: ${{ secrets.DEV_TOKEN }}
+          LOCAL_DEV_TOKEN: ${{ env.LOCAL_DEV_TOKEN }}
         run: |
+          $localVal = [System.Environment]::GetEnvironmentVariable('LOCAL_DEV_TOKEN', 'User')
           Write-Host "DEV_TOKEN (Secret): $env:DEV_SECRET"
-          Write-Host "LOCAL_DEV_TOKEN (Local): $env:LOCAL_DEV_TOKEN"
+          Write-Host "LOCAL_DEV_TOKEN (Local): $localVal"
 
-          if ($env:DEV_SECRET -eq $env:LOCAL_DEV_TOKEN) {
+          if ($env:DEV_SECRET -eq $localVal) {
             Write-Host "EXITO: Los tokens coinciden."
             exit 0
           } else {
